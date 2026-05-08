@@ -38,6 +38,7 @@ jobs:
       - name: Install Jupyter Book (via myst)
         run: npm install -g jupyter-book
       - name: Build HTML Assets
+        working-directory: telco-churn-mlops
         run: jupyter-book build --html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -46,3 +47,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
