@@ -4,5 +4,6 @@ project:
   github: https://github.com/ninocvl/Mini-Proyecto-Telco.git
   toc:
     - file: notebooks/1_eda_preprocessing
+    - file: notebooks/2_model_training
 site:
   template: book-theme
