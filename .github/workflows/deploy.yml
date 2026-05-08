@@ -32,15 +32,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: '3.11'
-      - name: Install Jupyter Book
-        run: python -m pip install --upgrade pip jupyter-book
+          node-version: 18.x
+      - name: Install Jupyter Book (via myst)
+        run: npm install -g jupyter-book
       - name: Build HTML Assets
-        working-directory: telco-churn-mlops
-        run: python -m jupyter_book build --html
+        run: jupyter-book build --html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -48,4 +46,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
