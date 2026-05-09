@@ -1,20 +1,21 @@
-from fastapi import FastAPI
-import joblib
-import pandas as pd
-import os
 import sys
+import os
 
-# Hacer que el directorio del script esté en sys.path para importar schemas.py
+# Ajuste de path DEBE ir antes de los imports locales
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from schemas import CustomerData  # ahora sí funciona
+from fastapi import FastAPI  # noqa: E402
+import joblib  # noqa: E402
+import pandas as pd  # noqa: E402
+from schemas import CustomerData  # noqa: E402
 
-# El resto del código se mantiene igual
+# Ruta absoluta al directorio del script para cargar el modelo
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(BASE_DIR, "model.joblib")
 
 app = FastAPI()
 model = joblib.load(model_path)
+
 
 @app.post("/predict")
 def predict(data: CustomerData):

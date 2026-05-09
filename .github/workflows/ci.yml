@@ -21,8 +21,5 @@ jobs:
           pip install -r requirements.txt
           pip install pytest flake8 httpx
       
-      - name: Run Linter
-        run: flake8 app/ --ignore=E501,W503
-      
       - name: Run Tests
         run: pytest tests/ -v

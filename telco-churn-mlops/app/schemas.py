@@ -49,3 +49,4 @@ class CustomerData(BaseModel):
                 "TotalCharges": 29.85,
             }
         }
+        
