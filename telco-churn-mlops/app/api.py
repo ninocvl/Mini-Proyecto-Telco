@@ -1,28 +1,24 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 import joblib
-import numpy as np
+import pandas as pd
+import os
+import sys
+
+# Hacer que el directorio del script esté en sys.path para importar schemas.py
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from schemas import CustomerData  # ahora sí funciona
+
+# El resto del código se mantiene igual
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "model.joblib")
 
 app = FastAPI()
-model = joblib.load("app/model.joblib")
-
-class CustomerData(BaseModel):
-    SeniorCitizen: int
-    MonthlyCharges: float
-    TotalCharges: float
-    Contract: str  # "Month-to-month", "One year", etc.
-    PaymentMethod: str  # "Electronic check", "Credit card", etc.
+model = joblib.load(model_path)
 
 @app.post("/predict")
 def predict(data: CustomerData):
-    # Preprocesamiento en memoria (ejemplo simplificado)
-    features = np.array([
-        data.SeniorCitizen,
-        data.MonthlyCharges,
-        data.TotalCharges,
-        1 if data.Contract == "Month-to-month" else 0,
-        1 if data.PaymentMethod == "Electronic check" else 0
-    ]).reshape(1, -1)
-    
-    prediction = model.predict_proba(features)[0][1]  # Probabilidad de churn
-    return {"churn_probability": float(prediction), "prediction": int(prediction > 0.5)}
+    input_df = pd.DataFrame([data.model_dump()])
+    proba = model.predict_proba(input_df)[0, 1]
+    pred_label = "Yes" if proba > 0.5 else "No"
+    return {"churn_probability": float(proba), "prediction": pred_label}

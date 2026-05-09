@@ -1,0 +1,11 @@
+.git
+.github
+notebooks
+tests
+*.md
+Dockerfile
+.env
+*.pyc
+__pycache__
+.gitignore
+myst.yml

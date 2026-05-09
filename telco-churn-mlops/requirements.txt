@@ -1,0 +1,11 @@
+fastapi>=0.95.0
+uvicorn
+scikit-learn
+pandas
+numpy
+joblib
+lime
+xgboost
+catboost
+lightgbm
+imbalanced-learn
