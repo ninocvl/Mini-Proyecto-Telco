@@ -4,7 +4,8 @@ import pandas as pd
 import os
 import pytest
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "telco-churn-mlops", "app", "model.joblib")
+# Subir un nivel desde tests/ a telco-churn-mlops/, luego entrar a app/
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "app", "model.joblib")
 
 
 @pytest.fixture
@@ -19,7 +20,6 @@ def test_model_loads(model):
 
 
 def test_model_predict_proba_shape(model):
-    """La salida de predict_proba debe tener 2 columnas (No churn, Churn)"""
     X = pd.DataFrame([{
         "gender": "Female", "SeniorCitizen": 0, "Partner": "Yes",
         "Dependents": "No", "tenure": 24, "PhoneService": "Yes",
@@ -38,7 +38,6 @@ def test_model_predict_proba_shape(model):
 
 
 def test_model_predict_shape(model):
-    """predict debe devolver un array con la etiqueta (0 o 1)"""
     X = pd.DataFrame([{
         "gender": "Male", "SeniorCitizen": 1, "Partner": "No",
         "Dependents": "No", "tenure": 1, "PhoneService": "Yes",
