@@ -1,6 +1,6 @@
 # Predicción de Churn en Telecomunicaciones — Proyecto MLOps End-to-End
 
-![CI](https://img.shields.io/github/actions/workflow/status/TU_USUARIO/Mini-Proyecto-Telco/ci.yml?label=CI&style=flat-square)
+![CI](https://img.shields.io/github/actions/workflow/status/t1fff/Mini-Proyecto-Telco/ci.yml?label=CI&style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.95+-green?style=flat-square)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square)
